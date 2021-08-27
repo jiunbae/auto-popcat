@@ -85,7 +85,7 @@ if __name__ == "__main__":
     parser.add_argument('--count', type=int, default=0,
                         help="click $count times")
     parser.add_argument('--delay', type=float, default=1.5,
-                        help="click $delay")
+                        help="click $delay (seconds)")
 
     parser.add_argument('--debug', action='store_true', default=False,
                         help="driver path")

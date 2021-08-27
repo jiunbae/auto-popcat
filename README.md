@@ -12,3 +12,4 @@ Auto click [Popcat.click](https://popcat.click/).
 
 - `--driver`: path to the driver.
 - `--count`: count to click.
+- `--delay`: delay to click.
