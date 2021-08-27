@@ -1,4 +1,5 @@
 import argparse
+import time
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -57,7 +58,7 @@ class Handler:
 
         self.driver = webdriver.Chrome(driver_path, options=options)
 
-    def __call__(self, count: int = 0):
+    def __call__(self, count: int = 0, delay: float = .5):
         self.driver.get(Handler.URL.MAIN)
         if not count:
             count = -1
@@ -65,6 +66,7 @@ class Handler:
             element = self.driver.find_element_by_class_name('cat-img')
             element.click()
 
+            time.sleep(delay)
             count -= 1
 
 def main(args: argparse.Namespace):
@@ -72,15 +74,18 @@ def main(args: argparse.Namespace):
     Handler.Config.HEADLESS = args.headless
 
     handler = Handler(args.driver)
-    handler(args.count)
+    handler(args.count, args.delay)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("Auto Cat Click")
     parser.add_argument('--driver', type=str, default='./bin/chromedriver.exe',
                         help="driver path")
+
     parser.add_argument('--count', type=int, default=0,
                         help="click $count times")
+    parser.add_argument('--delay', type=float, default=1.5,
+                        help="click $delay")
 
     parser.add_argument('--debug', action='store_true', default=False,
                         help="driver path")
